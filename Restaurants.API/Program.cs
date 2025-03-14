@@ -1,4 +1,5 @@
 using Restaurants.API.Controllers;
+using Restaurants.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,9 @@ builder.Services.AddControllers();
 
 // dependency injection per forecast service
 builder.Services.AddScoped<IWeatherForecastService, WeatherForecastService>();
+
+//DI del DbContext
+builder.Services.AddInfrastucture(builder.Configuration);
 
 var app = builder.Build();
 

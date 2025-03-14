@@ -13,3 +13,14 @@ Random-int: {{$randomInt}}
 
 ###
 
+
+@count=3
+POST {{Restaurants.API_HostAddress}}/weatherforecast/generate?count={{count}}
+Content-Type: application/json
+
+{
+  "min": -23,
+  "max": 23
+}
+
+###

@@ -72,7 +72,7 @@ namespace Restaurants.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("HasDelevery")
+                    b.Property<bool>("HasDelivery")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")

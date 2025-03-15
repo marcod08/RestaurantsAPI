@@ -12,16 +12,5 @@ public class DishDto
     public int? KiloCalories { get; set; }
 
     public int RestaurantId { get; set; }
-    public static DishDto FromEntity (Dish d)
-    {
-        return new DishDto()
-        {
-            Id = d.Id,
-            Name = d.Name,
-            Description = d.Description,
-            Price = d.Price,
-            KiloCalories = d.KiloCalories,
-        };
-    }
 
 }

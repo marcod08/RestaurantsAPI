@@ -10,7 +10,6 @@ builder.Services.AddControllers();
 
 builder.Services.AddApplication();
 
-//DI del DbContext
 builder.Services.AddInfrastucture(builder.Configuration);
 
 var app = builder.Build();

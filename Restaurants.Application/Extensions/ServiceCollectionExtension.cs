@@ -12,7 +12,7 @@ public static class ServiceCollectionExtensions
     {
         var applicationAssempbly = typeof(ServiceCollectionExtensions).Assembly;
 
-        services.AddScoped<IRestaurantsService, RestaurantsService>();
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(applicationAssempbly));
 
         services.AddAutoMapper(applicationAssempbly);
 

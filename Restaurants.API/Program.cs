@@ -13,14 +13,7 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastucture(builder.Configuration);
 
 builder.Host.UseSerilog((context, configuration) =>
-    configuration
-        //filtro sui log, solo warining o superiori sono visibili
-        .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning)
-
-        //il filtro precedente rimuove anche i log di entity
-        .MinimumLevel.Override("Microsoft.EntityFrameworkCore", Serilog.Events.LogEventLevel.Information) 
-        .WriteTo.Console(outputTemplate: "[{Timestamp:dd-MM HH:mm:ss} {Level:u3}] |{SourceContext}| {NewLine}{Message:lj}{NewLine}{Exception}")
-);
+    configuration.ReadFrom.Configuration(context.Configuration)); //configurazione spostate in appsettings
 
 var app = builder.Build();
 

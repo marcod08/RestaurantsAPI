@@ -13,7 +13,9 @@ public static class ServiceCollectionExtensions
     public static void AddInfrastucture(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("RestaurantsDb");
-        services.AddDbContext<RestaurantsDbContext>(option => option.UseSqlServer(connectionString));
+        services.AddDbContext<RestaurantsDbContext>(option =>
+            option.UseSqlServer(connectionString)
+                .EnableSensitiveDataLogging());
 
         //Addscoped Dipendency perchè fa riferimento a AddDbContext e anch'esso è scoped
         services.AddScoped<IRestaurantSeeder, RestaurantSeeder>();

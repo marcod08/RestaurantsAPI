@@ -1,6 +1,7 @@
 using Restaurants.Application.Extensions;
 using Restaurants.Infrastructure.Extensions;
 using Restaurants.Infrastructure.Seeders;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +10,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddApplication();
-
 builder.Services.AddInfrastucture(builder.Configuration);
+
+builder.Host.UseSerilog((context, configuration) =>
+    configuration
+        //filtro sui log, solo warining o superiori sono visibili
+        .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning)
+
+        //il filtro precedente rimuove anche i log di entity
+        .MinimumLevel.Override("Microsoft.EntityFrameworkCore", Serilog.Events.LogEventLevel.Information) 
+        .WriteTo.Console(outputTemplate: "[{Timestamp:dd-MM HH:mm:ss} {Level:u3}] |{SourceContext}| {NewLine}{Message:lj}{NewLine}{Exception}")
+);
 
 var app = builder.Build();
 
@@ -19,6 +29,8 @@ var seeder = scope.ServiceProvider.GetRequiredService<IRestaurantSeeder>();
 await seeder.Seed();
 
 // Configure the HTTP request pipeline.
+
+app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 

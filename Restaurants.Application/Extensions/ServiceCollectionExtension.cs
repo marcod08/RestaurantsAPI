@@ -3,6 +3,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 using Restaurants.Application.Restaurants;
+using Restaurants.Application.User;
 
 namespace Restaurants.Application.Extensions;
 
@@ -18,6 +19,10 @@ public static class ServiceCollectionExtensions
 
         services.AddValidatorsFromAssembly(applicationAssempbly)
             .AddFluentValidationAutoValidation(); // replace endopoint validations
+
+        services.AddScoped<IUserContext, UserContext>();
+
+        services.AddHttpContextAccessor(); //dobbiamo richiamarlo perchè lo iniettiamo nel userContext 
         
     }
 }

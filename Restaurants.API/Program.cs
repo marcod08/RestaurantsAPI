@@ -35,7 +35,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGroup("api/identity") // prefisso per gli endpoint
+app.MapGroup("api/identity") // endpoint prefix
+    .WithTags("Identity") // merging endpoint on identity
     .MapIdentityApi<User>();
 
 app.UseAuthorization();

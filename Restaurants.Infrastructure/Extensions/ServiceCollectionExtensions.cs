@@ -20,5 +20,6 @@ public static class ServiceCollectionExtensions
         //Addscoped Dipendency perchè fa riferimento a AddDbContext e anch'esso è scoped
         services.AddScoped<IRestaurantSeeder, RestaurantSeeder>();
         services.AddScoped<IRestaurantsRepository, RestaurantsRepository>();
+        services.AddScoped<IDishesRepository, DishesRepository>();
     }
 }

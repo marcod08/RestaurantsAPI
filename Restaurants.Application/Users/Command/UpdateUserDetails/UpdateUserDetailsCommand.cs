@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Restaurants.Application.Users.Command;
+namespace Restaurants.Application.Users.Command.UpdateUserDetails;
 
 public class UpdateUserDetailsCommand : IRequest
 {

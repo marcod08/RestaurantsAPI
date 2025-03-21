@@ -1,4 +1,5 @@
-﻿using Restaurants.Domain.Exceptions;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Restaurants.Domain.Exceptions;
 
 namespace Restaurants.API.Middlewares;
 
@@ -16,6 +17,12 @@ public class ErrorHandlingMiddleware(ILogger<ErrorHandlingMiddleware> logger) : 
             await context.Response.WriteAsync(notfound.Message);
 
             logger.LogWarning(notfound.Message);
+        }
+        catch(ForbidException)
+        {
+            context.Response.StatusCode = 403;
+            await context.Response.WriteAsync("Access Forbidden");
+
         }
         catch (Exception ex)
         {

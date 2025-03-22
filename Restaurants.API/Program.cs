@@ -44,3 +44,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { } // trick per far riferimento a program class al di fuori del presentation layer (test unit)
